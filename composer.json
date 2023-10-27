@@ -1,0 +1,21 @@
+{
+    "name": "virlatinus/googlon",
+    "description": "Googlon challenge",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Werner Garcia",
+            "email": "email@example.com"
+        }
+    ],
+    "require": {
+    },
+    "scripts": {
+        "start": "@php run.php > output.html && echo 'Output saved to file output.html'",
+        "serve": "@php -S 0.0.0.0:8080 run.php"
+    },
+    "config": {
+        "process-timeout": 3600
+    }
+}
