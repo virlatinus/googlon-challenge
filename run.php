@@ -232,13 +232,18 @@ foreach ($texts as $key => $text) {
     $numPrepositions = countPrepositions($text);
     $numVerbs = countVerbs($text);
     $numSubjVerbs = countSubjVerbs($text);
-    $vocabularyList = implode(' ', extractVocabulary($text));
+    $vocabularyList = implode(', ', extractVocabulary($text));
     $numPrettyNumbers = countPrettyNumbers($text);
-    $result1 = $numPrepositions === $expect[$key][0] ? $pass : $fail;
-    $result2 = $numVerbs === $expect[$key][1] ? $pass : $fail;
-    $result3 = $numSubjVerbs === $expect[$key][2] ? $pass : $fail;
-    $result4 = $vocabularyList === $expect[$key][3] ? $pass : $fail;
-    $result5 = $numPrettyNumbers === $expect[$key][4] ? $pass : $fail;
+    $result1 = $numPrepositions === $expect[$key][0] ? false : 'bg-red-50';
+    $output1 = !$result1 ? $pass : $fail;
+    $result2 = $numVerbs === $expect[$key][1] ? false : 'bg-red-50';
+    $output2 = !$result2 ? $pass : $fail;
+    $result3 = $numSubjVerbs === $expect[$key][2] ? false : 'bg-red-50';
+    $output3 = !$result3 ? $pass : $fail;
+    $result4 = $vocabularyList === implode(', ', preg_split('/\s+/', $expect[$key][3])) ? false : 'bg-red-50';
+    $output4 = !$result4 ? $pass : $fail;
+    $result5 = $numPrettyNumbers === $expect[$key][4] ? false : 'bg-red-50';
+    $output5 = !$result5 ? $pass : $fail;
 
     $text = addColors($text);
 
@@ -252,20 +257,20 @@ foreach ($texts as $key => $text) {
     </figure>
     <p class="my-4 text-xl font-bold tracking-tight text-gray-700 sm:text-2xl">Output</p>
     <blockquote class="font-semibold text-gray-500 mb-10">
-        <div class="flex gap-x-2"><span>1) There are <span class="text-blue-600">$numPrepositions prepositions</span> in the text</span>
-        $result1
+        <div class="flex gap-x-2 $result1"><span>1) There are <span class="text-blue-600">$numPrepositions prepositions</span> in the text</span>
+        $output1
         </div>
-        <div class="flex gap-x-2"><span>2) There are <span class="text-purple-600">$numVerbs verbs</span> in the text</span>
-        $result2
+        <div class="flex gap-x-2 $result2"><span>2) There are <span class="text-purple-600">$numVerbs verbs</span> in the text</span>
+        $output2
         </div>
-        <div class="flex gap-x-2"><span>3) There are <span class="text-orange-600">$numSubjVerbs subjunctive verbs</span> in the text</span>
-        $result3
+        <div class="flex gap-x-2 $result3"><span>3) There are <span class="text-orange-600">$numSubjVerbs subjunctive verbs</span> in the text</span>
+        $output3
         </div>
-        <div class="flex gap-x-2"><span>4) Vocabulary list: <span class="text-gray-600 italic font-normal">$vocabularyList</span></span>
-        $result4
+        <div class="flex gap-x-2 $result4"><span>4) Vocabulary list: <span class="text-gray-600 italic font-normal">$vocabularyList</span></span>
+        $output4
         </div>
-        <div class="flex gap-x-2"><span>5) There are <span class="text-teal-600">$numPrettyNumbers distinct pretty numbers</span> in the text</span>
-        $result5
+        <div class="flex gap-x-2 $result5"><span>5) There are <span class="text-teal-600">$numPrettyNumbers distinct pretty numbers</span> in the text</span>
+        $output5
         </div>
     </blockquote>
 EOF;
