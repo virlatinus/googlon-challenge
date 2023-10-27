@@ -202,34 +202,27 @@ echo <<<EOF
 <html lang="en">
     <head>
         <title>Googlon Challenge</title>
-        <style>
-        body, html, * {
-            font-family: sans-serif;
-        }
-        h1 {
-            border-bottom: 2px solid lightgray;
-            padding-bottom: 1rem;
-        }
-</style>
-    <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
     </head>
 <body>
-<div class="bg-white px-6 py-6 lg:px-8">
+<div class="bg-white px-6 py-6 lg:px-8 font-mono">
   <div class="mx-auto max-w-3xl text-base leading-7 text-gray-700">
     <p class="text-3xl font-bold tracking-tight text-gray-700 sm:text-4xl">Test Cases</p>
+
 EOF;
 
 $fail = <<<EOF
 <svg class="order-first mt-1 h-5 w-5 flex-none text-red-600" fill="currentColor" stroke="white" viewBox="2 2 20 20" stroke-width="2">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-</svg>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
 
 EOF;
 
 $pass = <<<EOF
 <svg class="order-first mt-1 h-5 w-5 flex-none text-green-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
-</svg>
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+          </svg>
+
 EOF;
 
 
@@ -249,39 +242,44 @@ foreach ($texts as $key => $text) {
     $output4 = !$result4 ? $pass : $fail;
     $result5 = $numPrettyNumbers === $expect[$key][4] ? false : 'bg-red-50';
     $output5 = !$result5 ? $pass : $fail;
-
-    $text = addColors($text);
+    
+    $vocabularyList = wordwrap($vocabularyList, 120);
+    $text = wordwrap(addColors($text), 120);
 
     echo <<<EOF
     <p class="my-4 text-2xl font-bold tracking-tight text-gray-700 sm:text-3xl border-gray-200 border-t-2 pt-4">Text $key</p>
     <p class="my-4 text-xl font-bold tracking-tight text-gray-700 sm:text-2xl">Input</p>
     <figure class="border-l-4 border-gray-300 pl-5">
         <blockquote class="font-semibold text-gray-500">
-    $text
-    </blockquote>
+          $text
+        </blockquote>
     </figure>
     <p class="my-4 text-xl font-bold tracking-tight text-gray-700 sm:text-2xl">Output</p>
     <blockquote class="font-semibold text-gray-500 mb-10">
         <div class="flex gap-x-2 $result1"><span>1) There are <span class="text-blue-600">$numPrepositions prepositions</span> in the text</span>
-        $output1
+          $output1
         </div>
         <div class="flex gap-x-2 $result2"><span>2) There are <span class="text-purple-600">$numVerbs verbs</span> in the text</span>
-        $output2
+          $output2
         </div>
         <div class="flex gap-x-2 $result3"><span>3) There are <span class="text-orange-600">$numSubjVerbs subjunctive verbs</span> in the text</span>
-        $output3
+          $output3
         </div>
-        <div class="flex gap-x-2 $result4"><span>4) Vocabulary list: <span class="text-gray-600 italic font-normal">$vocabularyList</span></span>
-        $output4
+        <div class="flex gap-x-2 $result4"><span>4) Vocabulary list: <span class="text-gray-600 italic font-normal">
+        $vocabularyList
+        </span></span>
+          $output4
         </div>
         <div class="flex gap-x-2 $result5"><span>5) There are <span class="text-teal-600">$numPrettyNumbers distinct pretty numbers</span> in the text</span>
-        $output5
+          $output5
         </div>
     </blockquote>
+
 EOF;
 }
 
 echo <<<EOF
 </body>
 </html>
+
 EOF;
