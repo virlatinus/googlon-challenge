@@ -129,7 +129,8 @@ function isPrettyNumber(int $number): bool
     return $number % 3 === 0 && $number >= 81827;
 }
 
-function countPrepositions(string $text): int {
+function countPrepositions(string $text): int
+{
     $num = 0;
     foreach (preg_split('/\s+/', $text) as $word) {
         if (isPreposition($word)) {
@@ -140,7 +141,8 @@ function countPrepositions(string $text): int {
     return $num;
 }
 
-function countVerbs(string $text): int {
+function countVerbs(string $text): int
+{
     $num = 0;
     foreach (preg_split('/\s+/', $text) as $word) {
         if (isVerb($word)) {
@@ -151,7 +153,8 @@ function countVerbs(string $text): int {
     return $num;
 }
 
-function countSubjVerbs(string $text): int {
+function countSubjVerbs(string $text): int
+{
     $num = 0;
     foreach (preg_split('/\s+/', $text) as $word) {
         if (isSubjVerb($word)) {
@@ -162,7 +165,8 @@ function countSubjVerbs(string $text): int {
     return $num;
 }
 
-function countPrettyNumbers(string $text): int {
+function countPrettyNumbers(string $text): int
+{
     $num = 0;
     foreach (preg_split('/\s+/', $text) as $word) {
         if (isPrettyNumber(toNumber($word))) {
@@ -173,7 +177,8 @@ function countPrettyNumbers(string $text): int {
     return $num;
 }
 
-function addColors(string $text): string {
+function addColors(string $text): string
+{
     $words = [];
     foreach (preg_split('/\s+/', $text) as $word) {
         if (isPreposition($word)) {
@@ -221,7 +226,7 @@ $fail = <<<EOF
 
 EOF;
 
-$pass= <<<EOF
+$pass = <<<EOF
 <svg class="order-first mt-1 h-5 w-5 flex-none text-green-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
 </svg>
